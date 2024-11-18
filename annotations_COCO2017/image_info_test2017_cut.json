@@ -1,0 +1,133 @@
+{
+    "info": {
+        "description": "COCO 2017 Dataset - Cut version for displaying",
+        "url": "http://cocodataset.org",
+        "version": "1.0",
+        "year": 2017,
+        "contributor": "COCO Consortium",
+        "date_created": "2017/09/01"
+    },
+    "images": [
+        {
+            "license": 6,
+            "file_name": "000000466319.jpg",
+            "coco_url": "http://images.cocodataset.org/test2017/000000466319.jpg",
+            "height": 480,
+            "width": 640,
+            "date_captured": "2013-11-14 11:04:33",
+            "id": 466319
+        },
+        {
+            "license": 2,
+            "file_name": "000000523573.jpg",
+            "coco_url": "http://images.cocodataset.org/test2017/000000523573.jpg",
+            "height": 500,
+            "width": 423,
+            "date_captured": "2013-11-14 12:21:59",
+            "id": 523573
+        },
+        {
+            "license": 3,
+            "file_name": "000000308929.jpg",
+            "coco_url": "http://images.cocodataset.org/test2017/000000308929.jpg",
+            "height": 640,
+            "width": 425,
+            "date_captured": "2013-11-14 15:53:03",
+            "id": 308929
+        }
+    ],
+    "licenses": [
+        {
+            "url": "http://creativecommons.org/licenses/by-nc-sa/2.0/",
+            "id": 1,
+            "name": "Attribution-NonCommercial-ShareAlike License"
+        },
+        {
+            "url": "http://creativecommons.org/licenses/by-nc/2.0/",
+            "id": 2,
+            "name": "Attribution-NonCommercial License"
+        },
+        {
+            "url": "http://creativecommons.org/licenses/by-nc-nd/2.0/",
+            "id": 3,
+            "name": "Attribution-NonCommercial-NoDerivs License"
+        },
+        {
+            "url": "http://creativecommons.org/licenses/by/2.0/",
+            "id": 4,
+            "name": "Attribution License"
+        },
+        {
+            "url": "http://creativecommons.org/licenses/by-sa/2.0/",
+            "id": 5,
+            "name": "Attribution-ShareAlike License"
+        },
+        {
+            "url": "http://creativecommons.org/licenses/by-nd/2.0/",
+            "id": 6,
+            "name": "Attribution-NoDerivs License"
+        },
+        {
+            "url": "http://flickr.com/commons/usage/",
+            "id": 7,
+            "name": "No known copyright restrictions"
+        },
+        {
+            "url": "http://www.usa.gov/copyright.shtml",
+            "id": 8,
+            "name": "United States Government Work"
+        }
+    ],
+    "categories": [
+        {
+            "supercategory": "person",
+            "id": 1,
+            "name": "person"
+        },
+        {
+            "supercategory": "vehicle",
+            "id": 2,
+            "name": "bicycle"
+        },
+        {
+            "supercategory": "vehicle",
+            "id": 3,
+            "name": "car"
+        },
+        {
+            "supercategory": "vehicle",
+            "id": 4,
+            "name": "motorcycle"
+        },
+        {
+            "supercategory": "vehicle",
+            "id": 5,
+            "name": "airplane"
+        },
+        {
+            "supercategory": "vehicle",
+            "id": 6,
+            "name": "bus"
+        },
+        {
+            "supercategory": "vehicle",
+            "id": 7,
+            "name": "train"
+        },
+        {
+            "supercategory": "vehicle",
+            "id": 8,
+            "name": "truck"
+        },
+        {
+            "supercategory": "vehicle",
+            "id": 9,
+            "name": "boat"
+        },
+        {
+            "supercategory": "outdoor",
+            "id": 10,
+            "name": "traffic light"
+        }
+    ]
+}
