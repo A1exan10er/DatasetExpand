@@ -51,54 +51,89 @@
     ],
     "categories": [
         {
-            "supercategory": "person",
+            "supercategory": "dirt",
             "id": 1,
-            "name": "person"
+            "name": "food"
         },
         {
-            "supercategory": "vehicle",
+            "supercategory": "dirt",
             "id": 2,
-            "name": "bicycle"
+            "name": "fuzz"
         },
         {
-            "supercategory": "vehicle",
+            "supercategory": "dirt",
             "id": 3,
-            "name": "car"
+            "name": "leaf"
         },
         {
-            "supercategory": "vehicle",
+            "supercategory": "dirt",
             "id": 4,
-            "name": "motorcycle"
+            "name": "liquid"
         },
         {
-            "supercategory": "vehicle",
+            "supercategory": "dirt",
             "id": 5,
-            "name": "airplane"
+            "name": "office"
         },
         {
-            "supercategory": "vehicle",
+            "supercategory": "dirt",
             "id": 6,
-            "name": "bus"
+            "name": "paper"
         },
         {
-            "supercategory": "vehicle",
+            "supercategory": "dirt",
             "id": 7,
-            "name": "train"
+            "name": "stone"
         },
         {
-            "supercategory": "vehicle",
+            "supercategory": "dirt",
             "id": 8,
-            "name": "truck"
+            "name": "street dirt"
         },
         {
-            "supercategory": "vehicle",
+            "supercategory": "object",
             "id": 9,
-            "name": "boat"
+            "name": "usb stick"
         },
         {
-            "supercategory": "outdoor",
+            "supercategory": "object",
             "id": 10,
-            "name": "traffic light"
+            "name": "tape"
+        },
+        {
+            "supercategory": "object",
+            "id": 11,
+            "name": "scissor"
+        }
+        {
+            "supercategory": "object",
+            "id": 12,
+            "name": "ruler"
+        },
+        {
+            "supercategory": "object",
+            "id": 13,
+            "name": "pen"
+        },
+        {
+            "supercategory": "object",
+            "id": 14,
+            "name": "paper and notebook"
+        },
+        {
+            "supercategory": "object",
+            "id": 15,
+            "name": "other"
+        },
+        {
+            "supercategory": "object",
+            "id": 16,
+            "name": "key"
+        },
+        {
+            "supercategory": "object",
+            "id": 17,
+            "name": "business card"
         }
     ],
     "images": [
