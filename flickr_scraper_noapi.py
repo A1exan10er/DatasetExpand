@@ -50,6 +50,8 @@ for i in results:
         # Problem: license saved twice for the same image
         # Solution: save license only if the image URL is different from the last image URL
 
+        # TODO: Add file name, height and width, date_captured, id to the image_info.json file 
+
         # Write license and image URL to a json file
         with open("image_info.json", "a") as f:
             f.write(f"{{\"license\":{str[license_index + 9 : license_index + 10]},\"url\":\"{image_url}\"}},\n")
