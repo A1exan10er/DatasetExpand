@@ -5,6 +5,7 @@ import numpy as np
 urls = [] # List to store image URLs
 license_list = [] # List to store license info
 
+# TODO: Add a loop to scrape multiple pages
 # Example page number
 page = 2
 
