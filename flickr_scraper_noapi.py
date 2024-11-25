@@ -41,21 +41,32 @@ for i in results:
     # Example key-value pair: "displayUrl":"\/\/live.staticflickr.com\/4664\/39077172375_dcb060fbda_b.jpg"
     # A second key-value pair: "url":"\/\/live.staticflickr.com\/4664\/39077172375_dcb060fbda_b.jpg"
     image_url = "https://" + str[i - 70 : i + 6].replace("\\", "").split("//")[-1] # "i - 70" is the start of the key-value pair and "i + 6" is the end of the key-value pair
-    if image_url != last_image_url:
+                                                                                   # replace("\\", ""): remove the backslash
+                                                                                   # split("//")[-1]: get the second part of the split string
+    # Problem: license saved twice for the same image
+    # Solution: save license only if the image URL is different from the last image URL
+    if image_url != last_image_url: # Check if the image URL is different from the last image URL
         urls.append(image_url)
         last_image_url = image_url
         
         # Add license info
         license_index = str.rfind("license", 0, i) # Find the last occurrence of "license" before the image URL
-        license_list.append(str[license_index + 9 : license_index + 10]) # "license" is 7 characters long, so the license number is at index "license_index + 9"
-        # Problem: license saved twice for the same image
-        # Solution: save license only if the image URL is different from the last image URL
+        # license_list.append(str[license_index + 9 : license_index + 10]) # "license" is 7 characters long, so the license number is at index "license_index + 9"
+        license_number = str[license_index + 9 : str.find(",", license_index)] # "license" is 7 characters long, so the license number is at index "license_index + 9"
 
-        # TODO: Add file name, height and width, date_captured, id to the image_info.json file 
+        # Link example: \/\/live.staticflickr.com\/65535\/51825930028_f35ff417d2_b.jpg
+        file_name = image_url.split("/")[-1] # Get the file name from the image URL, which is the last part of the URL
+        height_index = str.find("height", i) # Find the index of "height" after the image URL
+        height = str[height_index + 8 : str.find(",", height_index)] # "height" is 6 characters long, so the height number is at index "height_index + 8"
+        width_index = str.find("width", i) # Find the index of "width" after the image URL
+        width = str[width_index + 7 : str.find(",", width_index)] # "width" is 5 characters long, so the width number is at index "width_index + 7"
 
-        # Write license and image URL to a json file
+        # TODO: Add date_captured, id to the image_info.json file 
+        
+
+        # Write license, file name, height, width and image URL to a json file
         with open("image_info.json", "a") as f:
-            f.write(f"{{\"license\":{str[license_index + 9 : license_index + 10]},\"url\":\"{image_url}\"}},\n")
+            f.write(f"{{\"license\":{license_number},\"file_name\":\"{file_name}\",\"height\":{height},\"width\":{width},\"url\":\"{image_url}\"}},\n")
         
 
 urls = list(np.unique(np.array(urls)))
@@ -63,17 +74,17 @@ print(len(urls), urls)
 print(len(license_list), license_list)
 
 
-# # Download images
-# download_dir = "/home/tianyu/Projects/DatasetExpand/downloads"
-# os.makedirs(download_dir, exist_ok=True)
+# Download images
+download_dir = "/home/tianyu/Projects/DatasetExpand/downloads"
+os.makedirs(download_dir, exist_ok=True)
 
-# for url in urls:
-#     try:
-#         image_name = os.path.join(download_dir, url.split("/")[-1])
-#         if os.path.exists(image_name):
-#             print(f"Image already exists: {image_name}")
-#             continue
-#         urllib.request.urlretrieve(url, image_name)
-#         print(f"Downloaded {image_name}")
-#     except Exception as e:
-#         print(f"Failed to download {url}: {e}")
+for url in urls:
+    try:
+        image_name = os.path.join(download_dir, url.split("/")[-1])
+        if os.path.exists(image_name):
+            print(f"Image already exists: {image_name}")
+            continue
+        urllib.request.urlretrieve(url, image_name)
+        print(f"Downloaded {image_name}")
+    except Exception as e:
+        print(f"Failed to download {url}: {e}")
