@@ -1,6 +1,6 @@
 import urllib.request
 import os
-import numpy as np
+# import numpy as np
 import datetime
 
 # Make directory to store downloaded images
