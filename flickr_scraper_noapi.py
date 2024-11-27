@@ -70,8 +70,7 @@ for i in url_index_results:
             f.write(image_info + "\n")
             last_image_info = image_info
 
-# urls = list(np.unique(np.array(urls)))
-# print(len(urls), urls)
+# urls = list(np.unique(np.array(urls))) # Remove duplicate URLs
 print(len(urls))
 
 # Download images
