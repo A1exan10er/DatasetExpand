@@ -129,7 +129,7 @@ class FlickrScraper:
                 )
                 if entry not in unique_entries:
                     unique_entries.add(entry)
-                    unique_image_info_line_list.append(image_info)
+                    unique_image_info_line_list.append(image_info_line)
             except json.JSONDecodeError as e:
                 print(f"Failed to parse JSON line: {line}. Error: {e}")
         
