@@ -135,9 +135,9 @@ class FlickrScraper:
         
         # Write back only the unique entries to the file
         with open(os.path.join(self.download_dir, "image_info.json"), "w") as f:
-            for image_info in unique_image_info_line_list:
-                json.dump(image_info, f)
-                f.write("\n")
+            for image_info_line in unique_image_info_line_list:
+                json.dump(image_info_line, f)
+                f.write(",\n") # Add a comma after each JSON object
         
         print(f"Removed duplicates. Total unique entries: {len(unique_image_info_line_list)}")
     
@@ -193,7 +193,7 @@ class FlickrScraper:
         with open(os.path.join(self.download_dir, "image_info.json"), "w") as f:
             for image_info_line in image_info_list:
                 json.dump(image_info_line, f)
-                f.write("\n")
+                f.write(",\n") # Add a comma after each JSON object
         
         print(f"Checked and updated IDs. Total entries: {len(image_info_list)}")
 
