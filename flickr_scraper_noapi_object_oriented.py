@@ -18,12 +18,17 @@ class FlickrScraper:
             self.scrape_page(page)
         self.download_images()
 
-    def scrape_page(self, page):
+    def scrape_page(self, page): # Scrape a single page and extract image info
         url = f"https://www.flickr.com/search?text={self.search_text}&structured=yes&page={page}"
         file_pointer = urllib.request.urlopen(url)
         page_content = file_pointer.read().decode("utf8")
         file_pointer.close()
         self.extract_image_info(page_content)
+    
+    def scrape_start_end_page(self, start_page, end_page):
+        for page in range(start_page, end_page + 1):
+            self.scrape_page(page)
+        self.download_images()
 
     def extract_image_info(self, page_content):
         url_index_results = [index for index in range(len(page_content)) if page_content.startswith("_b.jpg", index)]
@@ -54,9 +59,10 @@ class FlickrScraper:
             if image_info != self.last_image_info:
                 f.write(image_info + "\n")
                 self.last_image_info = image_info
-    
-    # def create_download_dir(self):
-    #     os.makedirs(self.download_dir, exist_ok=True)
+
+
+        # self.remove_invalid_url_and_update_file()
+
 
     def download_images(self):
         for url in self.urls:
@@ -77,23 +83,22 @@ class FlickrScraper:
             urls_in_file = set() # Type: set, store unique URLs
             duplicate_flag = False
             for line in image_info_file.splitlines():
-                if "\"url\":" in line: # Check if the line contains the key "url"
-                    url_start = line.find("\"url\":") + 7 # +7 to skip the key '"url":'
-                    url_end = line.find("\",", url_start) # "\", " is the end of the URL
-                    url = line[url_start:url_end]
-                    # print(url)
+                try:
+                    image_info_line = json.loads(line.strip().rstrip(','))
+                    url = image_info_line["url"]
                     if url in urls_in_file:
                         print(f"Duplicate URL found: {url}")
                         duplicate_flag = True
                     else:
                         urls_in_file.add(url)
-            if not duplicate_flag:
-                print("No duplicate URLs found")
-                print(f"Total URLs: {len(urls_in_file)}")
-            else:
-                # TODO: Remove duplicated image info from "image_info.json" and save the id of removed image info 
+                except json.JSONDecodeError as e:
+                    print(f"Failed to parse JSON line: {line}. Error: {e}")
+            if duplicate_flag:
                 print("Removing duplicate image info")
                 self.remove_duplicate_image_info()
+            else:
+                print("No duplicate URLs found")
+                print(f"Total URLs: {len(urls_in_file)}")
 
     # def remove_duplicate_image_info(self):
     #     # First, save all lines read from "image_info.json" to somewhere                
@@ -108,39 +113,97 @@ class FlickrScraper:
         
         # Use a set to keep track of unique entries based on the specified fields
         unique_entries = set()
-        unique_image_info_list = []
+        unique_image_info_line_list = []
         
         for line in lines:
             try:
                 # Remove trailing commas and ensure each line is a valid JSON object
                 line = line.strip().rstrip(',')
-                image_info = json.loads(line)
+                image_info_line = json.loads(line)
                 entry = (
-                    image_info["license"],
-                    image_info["file_name"],
-                    image_info["height"],
-                    image_info["width"],
-                    image_info["url"]
+                    image_info_line["license"],
+                    image_info_line["file_name"],
+                    image_info_line["height"],
+                    image_info_line["width"],
+                    image_info_line["url"]
                 )
                 if entry not in unique_entries:
                     unique_entries.add(entry)
-                    unique_image_info_list.append(image_info)
+                    unique_image_info_line_list.append(image_info)
             except json.JSONDecodeError as e:
                 print(f"Failed to parse JSON line: {line}. Error: {e}")
         
         # Write back only the unique entries to the file
         with open(os.path.join(self.download_dir, "image_info.json"), "w") as f:
-            for image_info in unique_image_info_list:
+            for image_info in unique_image_info_line_list:
                 json.dump(image_info, f)
                 f.write("\n")
         
-        print(f"Removed duplicates. Total unique entries: {len(unique_image_info_list)}")
+        print(f"Removed duplicates. Total unique entries: {len(unique_image_info_line_list)}")
+    
+    def remove_invalid_url_and_update_file(self):
+        # Read all lines from "image_info.json"
+        with open(os.path.join(self.download_dir, "image_info.json"), "r") as f:
+            lines = f.readlines()
+        
+        valid_lines = []
+        for line in lines:
+            # Split the line by newline to handle multiple JSON objects in a single line
+            json_objects = line.strip().split('\n')
+            for json_object in json_objects:
+                try:
+                    image_info_line = json.loads(json_object)
+                    if "https://live.staticflickr.com/" in image_info_line["url"]:
+                        valid_lines.append(json.dumps(image_info_line) + '\n')
+                    else:
+                        print(f"Invalid URL: {image_info_line['url']}")
+                except json.JSONDecodeError as e:
+                    print(f"Remove invalid url. Failed to parse JSON line: {json_object}. Error: {e}")
+        
+        # Write back the updated entries to the file
+        with open(os.path.join(self.download_dir, "image_info.json"), "w") as f:
+            for line in valid_lines:
+                f.write(line)
+        
+        print("Removed invalid URLs and updated the file.")
+
+    def image_info_id_check(self):
+        # Check if the "id" field in "image_info.json" is continuous
+        with open(os.path.join(self.download_dir, "image_info.json"), "r") as f:
+            lines = f.readlines()
+        
+        image_info_list = []
+        for line in lines:
+            try:
+                # Remove trailing commas and ensure each line is a valid JSON object
+                line = line.strip().rstrip(',')
+                image_info_line = json.loads(line)
+                image_info_list.append(image_info_line)
+            except json.JSONDecodeError as e:
+                print(f"Failed to parse JSON line: {line}. Error: {e}")
+        
+        # Ensure "id" is continuous
+        current_id = 1
+        for image_info_line in image_info_list:
+            if image_info_line["id"] != current_id:
+                image_info_line["id"] = current_id
+            current_id += 1
+        
+        # Write back the updated entries to the file
+        with open(os.path.join(self.download_dir, "image_info.json"), "w") as f:
+            for image_info_line in image_info_list:
+                json.dump(image_info_line, f)
+                f.write("\n")
+        
+        print(f"Checked and updated IDs. Total entries: {len(image_info_list)}")
+
 
 if __name__ == "__main__":
     search_text = "usb+stick"
     download_dir = f"/home/tianyu/Projects/DatasetExpand/downloads_flickr/{search_text}"
-    pages = 6 # Number of pages to scrape
+    pages = 50 # Number of pages to scrape
     scraper = FlickrScraper(download_dir, search_text, pages)
-    scraper.scrape()
+    # scraper.scrape()
+    # scraper.scrape_start_end_page(51, 52)
     scraper.duplicate_image_info_check_and_remove()
-    # scraper.remove_duplicate_image_info()
+    scraper.image_info_id_check()
