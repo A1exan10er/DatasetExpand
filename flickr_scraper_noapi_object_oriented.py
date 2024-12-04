@@ -196,6 +196,36 @@ class FlickrScraper:
                 f.write(",\n") # Add a comma after each JSON object
         
         print(f"Checked and updated IDs. Total entries: {len(image_info_list)}")
+        self.json_file_structure_check()
+    
+    def json_file_structure_check(self):
+        # Ensure the JSON file starts with '[' and ends with ']'
+        with open(os.path.join(self.download_dir, "image_info.json"), "r") as f:
+            lines = f.readlines()
+        
+        if not lines:
+            print("The file is empty.")
+            return
+        
+        # Remove any existing brackets
+        if lines[0].strip() == "[":
+            lines = lines[1:]
+        if lines[-1].strip() == "]":
+            lines = lines[:-1]
+        
+        # Remove trailing comma from the last JSON object if it exists
+        if lines and lines[-1].strip().endswith(","):
+            lines[-1] = lines[-1].rstrip(",\n") + "\n"
+        
+        # Add the square brackets
+        lines.insert(0, "[\n")
+        lines.append("]")
+        
+        # Write back the updated entries to the file
+        with open(os.path.join(self.download_dir, "image_info.json"), "w") as f:
+            f.writelines(lines)
+        
+        print("Ensured the JSON file starts with '[' and ends with ']'.")
 
 
 if __name__ == "__main__":
