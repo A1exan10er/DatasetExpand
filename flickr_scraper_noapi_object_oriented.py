@@ -229,9 +229,17 @@ class FlickrScraper:
 
 
 if __name__ == "__main__":
-    search_text = "usb+stick"
+    # search_text = "usb+stick"
+    # search_text = "tapes"
+    # search_text = "scissors"
+    # search_text = "rulers"
+    # search_text = "pens"
+    # search_text = "paper+and+notebooks"
+    # search_text = "keys"
+    search_text = "business+cards"
+    # ...
     download_dir = f"/home/tianyu/Projects/DatasetExpand/downloads_flickr/{search_text}"
-    pages = 80 # Number of pages to scrape
+    pages = 75 # Number of pages to scrape
     # "HTTP Error 429: Too Many Requests" error may occur if the number of pages is too high
     # Guess the limit is around 70-80 pages
     scraper = FlickrScraper(download_dir, search_text, pages)
