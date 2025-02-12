@@ -7,8 +7,13 @@ The folder "downloads_flickr" contains 8 object categories that are used in the 
 
 The downloaded images were not uploaded onto GitHub due to the size restriction. The dataset with filtered images can be found on Roboflow (https://universe.roboflow.com/creatingmasks/office-objects-cjjon)
 
-# Usage
-Run "flickr_scraper_noapi_object_oriented.py", a new folder (mainfolder) will show up at the path location according to variable "download_dir". Every object has its own folder and will be automatically created. In each subfolder (object), the file "image_info.json" records all needed image information.
+<!-- # Usage
+Run "flickr_scraper_noapi_object_oriented.py", a new folder (mainfolder) will show up at the path location according to variable "download_dir". Every object has its own folder and will be automatically created. In each subfolder (object), the file "image_info.json" records all needed image information. -->
+
+### How to Use
+Run `flickr_scraper_noapi_object_oriented.py`. After execution, a new folder named **mainfolder** will be created at the path location specified by the `download_dir` variable. Inside this folder, each object will have its own subfolder, which is automatically created. Within each subfolder (object), a file named `image_info.json` is generated, containing all the necessary information about the downloaded images.
+
+---
 
 <!-- "Scraper_Selenium_new.py" and "search_beautifulsoup.py" use  -->
 ### File Descriptions
