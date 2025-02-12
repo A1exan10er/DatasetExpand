@@ -47,7 +47,7 @@ This script is a Flickr scraper that does not rely on APIs, Selenium, or Beautif
 
 ---
 
-### 'flickr_scraper_with_api.py'
+### `flickr_scraper_with_api.py`
 This file locates inside the folder **Flickr_scraper_with_API**. It uses APIs from Flickr to scrape images from the website.
 
 ---
