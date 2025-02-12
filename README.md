@@ -39,6 +39,19 @@ Run `flickr_scraper_noapi_object_oriented.py`. After execution, a new folder nam
 <!-- "Scraper_Selenium_new.py" and "search_beautifulsoup.py" use  -->
 ## File Descriptions
 
+### `flickr_scraper_noapi_object_oriented.py`
+This script is a Flickr scraper that does not rely on APIs, Selenium, or BeautifulSoup. Instead, it uses direct HTTP requests to search for and download images from Flickr. This approach makes it lightweight, easy to deploy, and compatible with different machines. It is designed to create a structured dataset by organizing images into folders and generating metadata files (`image_info.json`) for each object.
+
+**Dependency:**
+- **Requests**: A Python library for making HTTP requests.
+
+---
+
+### 'flickr_scraper_with_api.py'
+This file locates inside the folder **Flickr_scraper_with_API**. It uses APIs from Flickr to scrape images from the website.
+
+---
+
 ### `Scraper_Selenium_new.py`
 This script utilizes **Selenium** to automate web browsing and perform image searches on the **VCG website**. It is capable of navigating the website, searching for images, and downloading them. Selenium is used to handle dynamic content and interact with web elements, making it suitable for websites that rely heavily on JavaScript.
 
