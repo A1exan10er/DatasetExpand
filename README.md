@@ -67,14 +67,14 @@ This script employs **BeautifulSoup** to parse HTML content and extract image da
 - **BeautifulSoup**: A Python library for parsing HTML and XML documents, often used for web scraping.
 
 ---
+<!-- ### Common Functionality
+Both scripts are designed to search for and download images from their respective websites. While `Scraper_Selenium_new.py` is tailored for websites like VCG, `search_beautifulsoup.py` is optimized for contents on Flickr. -->
 
 ### `data_format.py`
 This script is designed to clean and adjust image information stored in the JSON file **image_info.json**. 
 The script reads and filters image information from **image_info.json**, ensuring that only entries with corresponding image files are retained. Then, the filtered information are stored to a new JSON file **image_info_filtered.json**. An optional method is included to ensure the continuity of the `id` field in the JSON file.
 
 ---
-<!-- ### Common Functionality
-Both scripts are designed to search for and download images from their respective websites. While `Scraper_Selenium_new.py` is tailored for websites like VCG, `search_beautifulsoup.py` is optimized for contents on Flickr. -->
 
 ## Questions/Future Work
 * Is it possible to choose/pick pictures from COCO dataset (91 categories?) and use them in the dirt-objects dataset?
