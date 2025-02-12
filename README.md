@@ -42,7 +42,7 @@ Run `flickr_scraper_noapi_object_oriented.py`. After execution, a new folder nam
 ### `Scraper_Selenium_new.py`
 This script utilizes **Selenium** to automate web browsing and perform image searches on the **VCG website**. It is capable of navigating the website, searching for images, and downloading them. Selenium is used to handle dynamic content and interact with web elements, making it suitable for websites that rely heavily on JavaScript.
 
-**Dependencies:**
+**Dependency:**
 - **Selenium**: A powerful tool for browser automation and web scraping.
 
 ---
@@ -50,13 +50,13 @@ This script utilizes **Selenium** to automate web browsing and perform image sea
 ### `search_beautifulsoup.py`
 This script employs **BeautifulSoup** to parse HTML content and extract image data from **Flickr**. It searches for images based on specified criteria and downloads them. BeautifulSoup is ideal for parsing static HTML content and extracting information efficiently.
 
-**Dependencies:**
+**Dependency:**
 - **BeautifulSoup**: A Python library for parsing HTML and XML documents, often used for web scraping.
 
 ---
 
 ### Common Functionality
-Both scripts are designed to search for and download images from their respective websites. While `Scraper_Selenium_new.py` is tailored for dynamic websites like VCG, `search_beautifulsoup.py` is optimized for static content on Flickr.
+Both scripts are designed to search for and download images from their respective websites. While `Scraper_Selenium_new.py` is tailored for websites like VCG, `search_beautifulsoup.py` is optimized for contents on Flickr.
 
 ## Questions/Future Work
 * Is it possible to choose/pick pictures from COCO dataset (91 categories?) and use them in the dirt-objects dataset?
