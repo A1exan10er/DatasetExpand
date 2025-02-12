@@ -35,58 +35,6 @@ main_directory = "Office_Supplies_Images"
 if not os.path.exists(main_directory):
     os.makedirs(main_directory)
 
-'''
-# Function to download images from a given URL
-def download_images(url, page_number):
-    driver.get(url)
-    time.sleep(2)  # Give the page some time to load
-
-    # Attempt to handle the login window (close it if it appears)
-    try:
-        close_button = WebDriverWait(driver, 5).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'iconfont.passport-close'))
-        )
-        close_button.click()  # Click on the close button
-        print("Login window closed.")
-    except:
-        pass
-
-    # Simulate scrolling to trigger lazy-loading
-    for _ in range(3):  # Adjust the number of scrolls as needed
-        driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.END)
-        time.sleep(2)  # Adjust the sleep time between scrolls as needed
-
-    # Wait for lazy-loaded images to be fully loaded
-    try:
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_all_elements_located((By.CLASS_NAME, 'lazyload_hk.ll_loaded'))
-        )
-    except Exception as e:
-        print(f"Timed out waiting for elements to load on page {page_number}. Error: {e}")
-        return False  # Return False to indicate that the download was not successful
-
-    # Find all image elements on the page using the By.TAG_NAME method
-    images = driver.find_elements(By.TAG_NAME, 'img')
-
-    # Create a subdirectory for each page
-    page_directory = os.path.join(main_directory, f"page_{page_number}")
-
-    if not os.path.exists(page_directory):
-        os.makedirs(page_directory)
-
-    for i, image in enumerate(images):
-        # Get the source URL of the image
-        image_url = image.get_attribute('src')
-
-        # Download the image into the subdirectory
-        response = requests.get(image_url)
-        if not os.path.exists(os.path.join(page_directory, f"image_{i+1}.jpg")):
-            with open(os.path.join(page_directory, f"image_{i+1}.jpg"), "wb") as file:
-                file.write(response.content)
-
-    return True  # Return True to indicate a successful download
-'''
-
 # Function to download images from a given URL
 def download_images(url, page_number):
     driver.get(url)
